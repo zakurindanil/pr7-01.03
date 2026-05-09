@@ -1,6 +1,7 @@
 package com.example.stepcountzakurin;
 
 import android.hardware.Sensor;
+import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.os.Bundle;
@@ -10,7 +11,7 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements SensorEventListener{
 
     public boolean Active = false;
     SensorManager SensorManager;
@@ -57,5 +58,30 @@ public class MainActivity extends AppCompatActivity {
         Active = !Active;
         if(Active) btnPause.setText("ПАУЗА");
         else btnPause.setText("ВОЗОБНОВИТЬ");
+    }
+
+    @Override
+    public void onAccuracyChanged(Sensor sensor, int accuracy) {}
+
+    @Override
+    public void onSensorChanged(SensorEvent event) {
+        if (event.sensor.getType() == Sensor.TYPE_ACCELEROMETER){
+            float X = event.values[0];
+            float Y = event.values[1];
+            float Z = event.values[2];
+
+            float AccelerationSquare = (X*X+Y*Y+Z*Z)/(SensorManager.GRAVITY_EARTH*SensorManager.GRAVITY_EARTH);
+            long ActualTime = System.currentTimeMillis();
+
+            if(AccelerationSquare >= 2){
+                if(ActualTime - LastTimeUpdate < 200) return;
+                if(!Active) return;
+                .
+                LastTimeUpdate = ActualTime;
+
+                Count++;
+                tvResult.setText(String.valueOf(Count));
+            }
+        }
     }
 }
