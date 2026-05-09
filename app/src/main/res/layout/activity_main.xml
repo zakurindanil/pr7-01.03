@@ -47,7 +47,7 @@
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:background="@drawable/radius"
-        android:text="ПАУЗА"
+        android:text="НАЧАТЬ"
         android:textColor="#00B7FF"
         android:layout_marginLeft="75dp"
         android:layout_marginRight="75dp"

@@ -37,7 +37,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         LastTimeUpdate = System.currentTimeMillis();
     }
 
-    @Override
+    //@Override
     protected void onResunme(){
         super.onResume();
 
@@ -76,7 +76,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
             if(AccelerationSquare >= 2){
                 if(ActualTime - LastTimeUpdate < 200) return;
                 if(!Active) return;
-                .
+
                 LastTimeUpdate = ActualTime;
 
                 Count++;
